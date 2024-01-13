@@ -1,3 +1,5 @@
+@import "../../app.scss";
+
 .sidebar {
     z-index: 1000;
     position: fixed;
@@ -16,6 +18,10 @@
         width: 350px;
         background-color: white;
 
+        @include mobile {
+            width: 200px;
+        }
+
         .links {
             position: absolute;
             width: 100%;
@@ -28,6 +34,10 @@
 
             a {
                 font-size: 40px;
+
+                @include mobile {
+                    font-size: 30px;
+                }
             }
         }
     }

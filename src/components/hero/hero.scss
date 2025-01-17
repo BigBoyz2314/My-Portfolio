@@ -36,6 +36,7 @@
 
         h1 {
             font-size: 88px;
+            pointer-events: none;
 
             @include mobile {
                 font-size: 36px;
@@ -52,7 +53,6 @@
                 margin-right: 20px;
                 cursor: pointer;
                 font-weight: 300;
-                z-index: 9999 !important;
                 position: relative;
             }
         }
@@ -91,6 +91,7 @@
         color: #ffffff09;
         width: 50%;
         font-weight: bold;
+        pointer-events: none;
     }
 }
 

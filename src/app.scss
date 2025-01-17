@@ -22,7 +22,10 @@ a {
 
 section {
     height: 100vh;
-    // scroll-snap-align: center;
+}
+
+#Services {
+    height: auto;;
 }
 
 @mixin mobile {

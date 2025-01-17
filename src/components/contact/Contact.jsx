@@ -40,12 +40,12 @@ const Contact = () => {
 
 
   return (
-    <motion.div ref={ref} className="contact" variants={variants} initial="initial" whileInView="animate">
+    <motion.div ref={ref} className="contact" id="Contact" variants={variants} initial="initial" whileInView="animate">
         <motion.div className="textContainer" variants={variants}>
-            <motion.h1 variants={variants}>Let's Work Together</motion.h1>
+            <motion.h1 variants={variants}>Let&apos;s Work Together</motion.h1>
             <motion.div className="item" variants={variants}>
                 <h2>Email</h2> 
-                <span>zazimran@gmail.com</span>
+                <span>zain@zazsoft.com</span>
             </motion.div>
             <motion.div className="item" variants={variants}>
                 <h2>Address</h2> 
@@ -53,7 +53,7 @@ const Contact = () => {
             </motion.div>
             <motion.div className="item" variants={variants}>
                 <h2>Phone</h2> 
-                <span>+92 312 3456789</span>
+                <span>+92 316 4170447</span>
             </motion.div>
         </motion.div>
         <div className="formContainer">
@@ -63,7 +63,7 @@ const Contact = () => {
           whileInView={{ opacity: 0 }}
           transition={{ delay: 3, duration: 1 }}
         >
-            <svg width="420px" height="420px" viewBox="0 0 32.666 32.666">
+            <svg width="360px" height="360px" viewBox="0 0 32.666 32.666">
             <motion.path
               strokeWidth={0.2}
               fill="none"

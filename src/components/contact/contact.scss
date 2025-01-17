@@ -5,6 +5,12 @@
     display: flex;
     align-items: center;
     gap: 50px;
+    padding: 20px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 30px;
+    }
 
     .textContainer {
         flex: 1;
@@ -15,6 +21,16 @@
         h1 {
             font-size: 80px;
             line-height: 74px;
+
+            @media (max-width: 768px) {
+                font-size: 60px;
+                line-height: 56px;
+            }
+
+            @media (max-width: 480px) {
+                font-size: 40px;
+                line-height: 36px;
+            }
         }
 
         span {
@@ -24,25 +40,34 @@
 
     .formContainer {
         flex: 1;
+        position: relative;
 
         .phoneSvg {
             stroke: orange;
             position: absolute;
-            margin: auto;
-            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
         }
 
         form {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            
+
             input, textarea {
                 padding: 15px;
                 background-color: transparent;
                 border: 1px solid white;
                 color: white;
                 border-radius: 5px;
+
+                @media (max-width: 480px) {
+                    padding: 10px;
+                    display: inline-block;
+                }
             }
 
             button {
@@ -52,6 +77,10 @@
                 cursor: pointer;
                 border-radius: 5px;
                 font-weight: 500;
+
+                @media (max-width: 480px) {
+                    padding: 10px;
+                }
             }
         }
     }

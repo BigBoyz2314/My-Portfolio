@@ -28,6 +28,14 @@ const Links = () => {
 
   const items = ["Home", "Services", "Portfolio", "Contact"];
 
+  const handleClick = (e, item) => {
+    e.preventDefault();
+    const element = document.getElementById(item);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <motion.div className="links" variants={variants}>
       {items.map((item) => (
@@ -37,6 +45,7 @@ const Links = () => {
           variants={itemVariants}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
+          onClick={(e) => handleClick(e, item)}
         >
           {item}
         </motion.a>

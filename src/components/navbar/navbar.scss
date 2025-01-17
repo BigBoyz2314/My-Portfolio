@@ -27,11 +27,18 @@
         .social {
             display: flex;
             gap: 20px;
+
+            a {
+                background: white;
+                width: 30px;
+                height: 30px;
+                border-radius: 7px;
+            }
         }
 
         img {
-            width: 18px;
-            height: 18px;
+            width: 30px;
+            height: 30px;
         }
     }
 }

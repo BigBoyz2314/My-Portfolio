@@ -1,0 +1,123 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <string.h>
+#include <ctype.h>
+
+// Replace with your actual student ID
+#define STUDENT_ID "YOUR_STUDENT_ID"
+
+// Structure to pass data to the threads (optional for this simple case, but good practice)
+typedef struct {
+    char student_name[50];
+} thread_data_t;
+
+void *thread1_function(void *arg) {
+    FILE *input_file, *output_file;
+    int num, sum = 0;
+
+    input_file = fopen("input.txt", "r");
+    if (input_file == NULL) {
+        perror("Error opening input.txt");
+        pthread_exit(NULL);
+    }
+
+    while (fscanf(input_file, "%d", &num) == 1) {
+        sum += num;
+    }
+
+    fclose(input_file);
+
+    output_file = fopen("output.txt", "w");
+    if (output_file == NULL) {
+        perror("Error opening output.txt");
+        pthread_exit(NULL);
+    }
+
+    fprintf(output_file, "%d\n", sum);
+    fclose(output_file);
+
+    printf("Thread T1: Sum of integers from input.txt = %d\n", sum);
+
+    pthread_exit(NULL);
+}
+
+void *thread2_function(void *arg) {
+    thread_data_t *data = (thread_data_t *)arg;
+    FILE *output_file;
+    char *input_string = data->student_name;
+    int i;
+
+    printf("Thread T2: Input string from user: %s\n", input_string);
+
+    for (i = 0; input_string[i] != '\0'; i++) {
+        char lower_char = tolower(input_string[i]);
+        if (lower_char == 'a' || lower_char == 'e' || lower_char == 'i' || lower_char == 'o' || lower_char == 'u') {
+            input_string[i] = '*';
+        }
+    }
+
+    printf("Thread T2: Modified string: %s\n", input_string);
+
+    output_file = fopen("output.txt", "a"); // Append to the output file
+    if (output_file == NULL) {
+        perror("Error opening output.txt for appending");
+        pthread_exit(NULL);
+    }
+
+    fprintf(output_file, "%s\n", input_string);
+    fclose(output_file);
+
+    pthread_exit(NULL);
+}
+
+int main() {
+    pthread_t thread1, thread2;
+    thread_data_t thread2_data;
+
+    // Create input.txt file with 5 integers
+    FILE *input_file = fopen("input.txt", "w");
+    if (input_file == NULL) {
+        perror("Error creating input.txt");
+        return 1;
+    }
+    fprintf(input_file, "10\n");
+    fprintf(input_file, "25\n");
+    fprintf(input_file, "5\n");
+    fprintf(input_file, "15\n");
+    fprintf(input_file, "30\n");
+    fclose(input_file);
+
+    // Get student's full name as input
+    printf("Enter your Full Name: ");
+    fgets(thread2_data.student_name, sizeof(thread2_data.student_name), stdin);
+    // Remove trailing newline character if present
+    thread2_data.student_name[strcspn(thread2_data.student_name, "\n")] = 0;
+
+    // Create thread T1
+    if (pthread_create(&thread1, NULL, thread1_function, NULL) != 0) {
+        perror("Error creating thread T1");
+        return 1;
+    }
+
+    // Create thread T2
+    if (pthread_create(&thread2, NULL, thread2_function, &thread2_data) != 0) {
+        perror("Error creating thread T2");
+        return 1;
+    }
+
+    // Wait for both threads to finish
+    if (pthread_join(thread1, NULL) != 0) {
+        perror("Error joining thread T1");
+        return 1;
+    }
+
+    if (pthread_join(thread2, NULL) != 0) {
+        perror("Error joining thread T2");
+        return 1;
+    }
+
+    printf("Main thread: Both threads have finished.\n");
+
+    return 0;
+}
